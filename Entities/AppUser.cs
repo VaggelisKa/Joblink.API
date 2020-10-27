@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using API.Extensions;
 
 namespace API.Entities
@@ -18,7 +19,7 @@ namespace API.Entities
         public string LookingFor { get; set; }
         public string Skills { get; set; }
         public string City { get; set; }
-        public ICollection Photos { get; set; }
+        public ICollection<Photo> Photos { get; set; }
 
         public int GetAge()
         {
