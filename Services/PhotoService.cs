@@ -12,13 +12,13 @@ namespace API.Services
     {
         private readonly Cloudinary _cloudinary;
 
-        public PhotoService(IOptions<CloudinarySettings> config, Cloudinary cloudinary)
+        public PhotoService(IOptions<CloudinarySettings> config)
         {
             var acc = new Account
             (
                 config.Value.CloudName,
                 config.Value.ApiKey,
-                config.Value.ApiKey
+                config.Value.ApiSecret
             );
             _cloudinary = new Cloudinary(acc);
         }
