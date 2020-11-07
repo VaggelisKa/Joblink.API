@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Data;
@@ -88,6 +89,28 @@ namespace API.Controllers
             }
 
             return BadRequest("Problem while adding photo.");
+        }
+
+        [HttpPut("set-main-photo/{photoId}")]
+        public async Task<ActionResult> SetMainPhoto(int photoId)
+        {
+            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            var photo = user.Photos.FirstOrDefault(p => p.Id == photoId);
+
+            if (photo == null) return BadRequest("No photo selected");
+
+            if (photo.IsMain)
+            {
+                return BadRequest("Photo is already chosen as main");
+            }
+
+            var currentMain = user.Photos.FirstOrDefault(p => p.IsMain);
+            if (currentMain != null) currentMain.IsMain = false;
+            photo.IsMain = true;
+
+            if (await _userRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Failed to set main photo");
         }
     }
 }
