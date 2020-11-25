@@ -16,6 +16,7 @@ namespace API.Data.Migrations
                     SenderId = table.Column<int>(type: "INTEGER", nullable: false),
                     SenderUsername = table.Column<string>(type: "TEXT", nullable: true),
                     RecipientId = table.Column<int>(type: "INTEGER", nullable: false),
+                    RecipientUsername = table.Column<string>(type: "TEXT", nullable: true),
                     DateSent = table.Column<DateTime>(type: "TEXT", nullable: false),
                     DateRead = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Content = table.Column<string>(type: "TEXT", nullable: true),
